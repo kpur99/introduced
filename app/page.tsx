@@ -16,17 +16,25 @@ export default function LandingPage() {
         <section className="hero" id="top">
           <div className="corner-logo">introduced</div>
 
-          <div className="hero-copy">
-            <div className="brand">Introduced</div>
-            <h1>Want to be introduced?</h1>
-            <p>
-              Fill out your profile to be thoughtfully matched with someone
-              whose values, personality, and relationship goals align with
-              yours.
-            </p>
-            <a className="button" href="#profile">
-              Fill out your profile
-            </a>
+          <div className="hero-inner">
+            <img
+              className="hero-mascot"
+              src="/hero-mascot.png"
+              alt="Smiling heart mascot"
+            />
+
+            <div className="hero-copy">
+              <div className="brand">Introduced</div>
+              <h1>Want to be introduced?</h1>
+              <p>
+                Fill out your profile to be thoughtfully matched with someone
+                whose values, personality, and relationship goals align with
+                yours.
+              </p>
+              <a className="button" href="#profile">
+                Fill out your profile
+              </a>
+            </div>
           </div>
         </section>
 

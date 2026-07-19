@@ -123,9 +123,27 @@ textarea {
   letter-spacing: -0.03em;
 }
 
-.hero-copy {
-  width: min(720px, 100%);
+.hero-inner {
+  width: min(1040px, 100%);
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.hero-mascot {
+  flex: 0 0 auto;
+  width: clamp(290px, 38vw, 500px);
+  height: auto;
+  margin-bottom: -8px;
+  mix-blend-mode: lighten;
+}
+
+.hero-copy {
+  flex: 1 1 auto;
+  width: min(620px, 100%);
+  text-align: left;
 }
 
 .brand {
@@ -140,7 +158,7 @@ textarea {
 
 .hero-copy h1 {
   max-width: 620px;
-  margin: 0 auto 20px;
+  margin: 0 0 20px;
   font-size: clamp(1.65rem, 3.6vw, 2.75rem);
   line-height: 1.1;
   text-transform: uppercase;
@@ -149,7 +167,7 @@ textarea {
 
 .hero-copy p {
   max-width: 580px;
-  margin: 0 auto 34px;
+  margin: 0 0 34px;
   color: rgba(255, 243, 217, 0.78);
   font-size: 1rem;
   line-height: 1.75;
@@ -334,6 +352,22 @@ textarea {
 }
 
 @media (max-width: 900px) {
+  .hero-inner {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .hero-copy {
+    text-align: center;
+    width: min(620px, 100%);
+  }
+
+  .hero-copy h1,
+  .hero-copy p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .profile-section {
     grid-template-columns: 1fr;
   }
