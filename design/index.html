@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,500;1,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #4A3B30;
+    --ink-soft: #FBF3E4;
+    --paper: #FFFCF6;
+    --paper-light: #FFFFFF;
+    --seal: #B4502E;
+    --seal-dark: #8F3D22;
+    --brass: #9C7A3C;
+    --cream: #3C2F26;
+    --cream-dim: #8A7A67;
+    --bg: #F7EFE0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 2rem; }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--brass);
+  }
+  h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 600; }
+  em { font-style: italic; font-weight: 500; color: var(--brass); }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.75rem 0;
+  }
+  .wordmark { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.3rem; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; font-size: 0.9rem; }
+  .nav-links a { color: var(--cream-dim); text-decoration: none; }
+  .btn-ghost {
+    border: 1px solid var(--brass); color: var(--cream); background: none;
+    padding: 0.5rem 1.1rem; border-radius: 4px; font-size: 0.85rem;
+    font-family: 'Inter', sans-serif; cursor: pointer;
+  }
+  .btn-seal {
+    background: var(--seal); color: #FFF6EB; border: none;
+    padding: 0.85rem 1.6rem; border-radius: 4px; font-size: 0.95rem;
+    font-weight: 500; cursor: pointer; position: relative;
+  }
+
+  .hero {
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 3rem;
+    align-items: center; padding: 3rem 0 5rem;
+  }
+  .hero h1 { font-size: 3.1rem; line-height: 1.08; margin: 1rem 0 1.4rem; }
+  .hero p.sub { font-size: 1.1rem; color: var(--cream-dim); max-width: 30rem; margin-bottom: 2rem; }
+
+  .catalog-scene { position: relative; height: 360px; }
+  .card {
+    position: absolute; width: 230px; background: var(--paper-light);
+    border-radius: 3px; padding: 1.1rem 1.2rem; color: var(--ink);
+    box-shadow: 0 10px 26px rgba(74,59,48,0.16);
+    border: 1px solid rgba(74,59,48,0.08);
+  }
+  .card .photo {
+    width: 42px; height: 42px; border-radius: 50%; background: var(--bg);
+    margin-bottom: 0.7rem;
+  }
+  .card .name { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.05rem; }
+  .card .detail { font-size: 0.78rem; color: #6b6152; margin-top: 2px; }
+  .card .tag {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+    color: var(--seal); margin-top: 0.9rem; letter-spacing: 0.03em;
+  }
+  .card-a { top: 12px; left: 10px; transform: rotate(-4deg); }
+  .card-b { bottom: 8px; right: 0; transform: rotate(3deg); }
+  .knot-label {
+    position: absolute; top: 46%; left: 50%; transform: translate(-50%, -50%) rotate(-6deg);
+    font-family: 'Fraunces', serif; font-style: italic; font-weight: 600;
+    color: var(--seal); font-size: 1.05rem; background: var(--bg);
+    padding: 4px 12px; border: 1px solid var(--seal); border-radius: 20px;
+    opacity: 0; animation: appear 0.6s ease-out 1.4s forwards;
+  }
+  @keyframes appear { to { opacity: 1; } }
+  #string-path { stroke-dasharray: 500; stroke-dashoffset: 500; animation: draw 1.3s ease-out forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .divider { border-top: 1px solid rgba(74,59,48,0.14); }
+
+  .ledger { padding: 4.5rem 0; }
+  .ledger h2 { font-size: 2rem; margin-bottom: 2.2rem; }
+  .ledger-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    padding: 1.1rem 0; border-top: 1px solid rgba(74,59,48,0.14);
+    align-items: start;
+  }
+  .ledger-row:last-child { border-bottom: 1px solid rgba(74,59,48,0.14); }
+  .ledger-row .label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--cream-dim); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+  .ledger-row .old { color: var(--cream-dim); }
+  .ledger-row .new { color: var(--cream); }
+  .ledger-row .new em { color: var(--brass); }
+
+  .steps { padding: 4.5rem 0; }
+  .steps h2 { font-size: 2rem; margin-bottom: 2.5rem; }
+  .step-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .step-card {
+    background: var(--ink-soft); border-radius: 6px; padding: 1.6rem 1.4rem;
+    border-top: 3px solid var(--brass);
+  }
+  .step-card .num { font-family: 'IBM Plex Mono', monospace; color: var(--brass); font-size: 0.85rem; margin-bottom: 0.8rem; }
+  .step-card h3 { font-size: 1.15rem; margin-bottom: 0.5rem; }
+  .step-card p { font-size: 0.92rem; color: var(--cream-dim); }
+
+  .cta-band {
+    text-align: center; padding: 5rem 0; border-top: 1px solid rgba(74,59,48,0.14);
+  }
+  .cta-band h2 { font-size: 2.3rem; margin-bottom: 1rem; }
+  .cta-band p { color: var(--cream-dim); margin-bottom: 2rem; }
+
+  footer {
+    border-top: 1px solid rgba(74,59,48,0.14); padding: 2.5rem 0 3rem;
+    display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--cream-dim);
+  }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .step-row { grid-template-columns: 1fr; }
+    .ledger-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="wordmark">Introduced</div>
+    <div class="nav-links">
+      <a href="#">How it works</a>
+      <a href="#">For matchmakers</a>
+      <button class="btn-ghost">Sign in</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">No more swiping</div>
+      <h1>Every match is <em>read</em>,<br>not just <em>ranked</em>.</h1>
+      <p class="sub">Tell us who you are in a real conversation. Our matching algorithm proposes your best fits — then an actual person reviews every pairing before anyone's introduced.</p>
+      <button class="btn-seal">Start your introduction →</button>
+    </div>
+
+    <div class="catalog-scene">
+      <svg width="100%" height="100%" viewBox="0 0 300 360" style="position:absolute; top:0; left:0; overflow:visible;">
+        <path id="string-path" d="M 70 70 Q 150 190 220 290" stroke="var(--seal)" stroke-width="2" fill="none" />
+      </svg>
+      <div class="card card-a">
+        <div class="photo"></div>
+        <div class="name">Maren, 29</div>
+        <div class="detail">Nashville · wants a family</div>
+        <div class="tag">MATCH SCORE — 91</div>
+      </div>
+      <div class="card card-b">
+        <div class="photo"></div>
+        <div class="name">Jonah, 31</div>
+        <div class="detail">Franklin · slow-burn type</div>
+        <div class="tag">MATCH SCORE — 91</div>
+      </div>
+      <div class="knot-label">introduced</div>
+    </div>
+  </section>
+</div>
+
+<div class="divider"></div>
+
+<div class="wrap">
+  <section class="ledger">
+    <h2>Why not another app</h2>
+    <div class="ledger-row">
+      <div>
+        <div class="label">Other apps</div>
+        <div class="old">An algorithm shows you a stack of strangers and lets you swipe through hundreds.</div>
+      </div>
+      <div>
+        <div class="label">Introduced</div>
+        <div class="new">An algorithm proposes a handful of real fits — and <em>a person</em> checks each one before it's sent.</div>
+      </div>
+    </div>
+    <div class="ledger-row">
+      <div>
+        <div class="old">You do the matching yourself, one photo at a time.</div>
+      </div>
+      <div>
+        <div class="new">You have one honest conversation. We do the matching.</div>
+      </div>
+    </div>
+    <div class="ledger-row">
+      <div>
+        <div class="old">Optimized to keep you swiping.</div>
+      </div>
+      <div>
+        <div class="new">Built to get you off the app, on a date.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="divider"></div>
+
+<div class="wrap">
+  <section class="steps">
+    <h2>How it works</h2>
+    <div class="step-row">
+      <div class="step-card">
+        <div class="num">01</div>
+        <h3>You talk, we listen</h3>
+        <p>A short guided conversation, not a form — we ask what actually matters and follow up on your answers.</p>
+      </div>
+      <div class="step-card">
+        <div class="num">02</div>
+        <h3>The algorithm proposes</h3>
+        <p>We score compatibility across values, lifestyle, and what you're actually looking for — dealbreakers rule matches out entirely.</p>
+      </div>
+      <div class="step-card">
+        <div class="num">03</div>
+        <h3>A person ties the knot</h3>
+        <p>Every suggested match is reviewed by an actual matchmaker before either of you hears about it.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="cta-band">
+    <h2>Ready to be introduced?</h2>
+    <p>It takes about ten minutes, and no photo required to start.</p>
+    <button class="btn-seal">Start your introduction →</button>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div>Introduced — Spring Hill, TN</div>
+    <div>Privacy · Terms · Contact</div>
+  </footer>
+</div>
+
+</body>
+</html>

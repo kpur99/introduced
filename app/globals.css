@@ -1,0 +1,389 @@
+/* ============================================================
+   Introduced — global styles
+   Palette and type lifted directly from the reference design:
+   cream + charcoal, italic Georgia serif for display, uppercase
+   micro-labels, pill buttons. Shared across every page so the
+   landing page and the real intake flow feel like one product.
+   ============================================================ */
+
+:root {
+  --cream: #fff3d9;
+  --charcoal: #2f3d31;
+  --white: #ffffff;
+  --line-dark: rgba(47, 61, 49, 0.2);
+  --line-light: rgba(255, 243, 217, 0.22);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--cream);
+  color: var(--charcoal);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.serif-italic {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+}
+
+.small-label {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 30px;
+  border: 2px solid var(--cream);
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--charcoal);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  background: transparent;
+  color: var(--cream);
+}
+
+.button.on-cream {
+  border-color: var(--charcoal);
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.button.on-cream:hover {
+  background: transparent;
+  color: var(--charcoal);
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+  transform: none;
+}
+
+/* ============================================================
+   Landing page — split hero, how-it-works strip, inline
+   profile form. Converted from the finalized reference design.
+   ============================================================ */
+
+.hero {
+  min-height: 72vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 30px;
+  background: var(--charcoal);
+  color: var(--cream);
+  text-align: center;
+  overflow: hidden;
+}
+
+.corner-logo {
+  position: absolute;
+  top: 30px;
+  left: 34px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  letter-spacing: -0.03em;
+}
+
+.hero-copy {
+  width: min(720px, 100%);
+  margin: 0 auto;
+}
+
+.brand {
+  margin-bottom: 34px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(5rem, 13vw, 10rem);
+  font-style: italic;
+  font-weight: 700;
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+}
+
+.hero-copy h1 {
+  max-width: 620px;
+  margin: 0 auto 20px;
+  font-size: clamp(1.65rem, 3.6vw, 2.75rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.035em;
+}
+
+.hero-copy p {
+  max-width: 580px;
+  margin: 0 auto 34px;
+  color: rgba(255, 243, 217, 0.78);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.intro-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--cream);
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.intro-step {
+  min-height: 240px;
+  padding: 48px;
+  border-right: 1px solid var(--line-dark);
+}
+
+.intro-step:last-child {
+  border-right: 0;
+}
+
+.step-number {
+  display: block;
+  margin-bottom: 24px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.intro-step h2 {
+  margin-bottom: 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.85rem;
+  font-style: italic;
+}
+
+.intro-step p {
+  color: rgba(47, 61, 49, 0.78);
+  line-height: 1.7;
+}
+
+.profile-section {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  min-height: 100vh;
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.profile-heading {
+  padding: 90px 70px;
+  border-right: 1px solid var(--line-light);
+}
+
+.profile-heading-inner {
+  position: sticky;
+  top: 70px;
+}
+
+.profile-heading .small-label {
+  margin-bottom: 24px;
+}
+
+.profile-heading h2 {
+  margin-bottom: 25px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-style: italic;
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.profile-heading p {
+  max-width: 440px;
+  color: rgba(255, 243, 217, 0.74);
+  line-height: 1.7;
+}
+
+.form-wrap {
+  padding: 90px 70px;
+}
+
+.profile-form {
+  max-width: 720px;
+  padding: 42px;
+  background: var(--cream);
+  color: var(--charcoal);
+  border-radius: 4px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.profile-form label {
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid rgba(47, 61, 49, 0.3);
+  border-radius: 0;
+  background: transparent;
+  color: var(--charcoal);
+  outline: none;
+}
+
+.profile-form input,
+.profile-form select {
+  min-height: 50px;
+}
+
+.profile-form textarea {
+  min-height: 120px;
+  padding: 14px 0;
+  resize: vertical;
+}
+
+.profile-form input:focus,
+.profile-form select:focus,
+.profile-form textarea:focus {
+  border-color: var(--charcoal);
+}
+
+.submit-button {
+  width: 100%;
+  margin-top: 34px;
+  border-color: var(--charcoal);
+  background: var(--charcoal);
+  color: var(--cream);
+}
+
+.submit-button:hover {
+  background: transparent;
+  color: var(--charcoal);
+}
+
+.success {
+  padding: 40px 10px;
+  text-align: center;
+}
+
+.success h3 {
+  margin-bottom: 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.5rem;
+  font-style: italic;
+}
+
+.success p {
+  color: rgba(47, 61, 49, 0.75);
+}
+
+.landing-footer {
+  padding: 30px 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  background: var(--cream);
+  color: var(--charcoal);
+  border-top: 1px solid var(--line-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .profile-section {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-step {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-dark);
+  }
+
+  .profile-heading {
+    border-right: 0;
+    border-bottom: 1px solid var(--line-light);
+  }
+
+  .profile-heading-inner {
+    position: static;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero {
+    min-height: 66vh;
+    padding: 70px 24px;
+  }
+
+  .corner-logo {
+    top: 20px;
+    left: 22px;
+  }
+
+  .intro-step,
+  .profile-heading,
+  .form-wrap {
+    padding: 55px 24px;
+  }
+
+  .profile-form {
+    padding: 28px 20px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-footer {
+    flex-direction: column;
+    padding: 25px 24px;
+  }
+}

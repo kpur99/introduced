@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,500;1,600&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FDF3EF;
+    --blush: #F6D9D6;
+    --rose: #D98B9B;
+    --rose-deep: #B96B80;
+    --lavender: #D9CBE8;
+    --peach: #F6C9A8;
+    --plum: #5B3F4B;
+    --plum-soft: #8E717D;
+    --card: #FFFFFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--plum);
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+  .script { font-family: 'Caveat', cursive; color: var(--rose-deep); }
+  em { font-style: italic; color: var(--rose-deep); font-weight: 500; }
+
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(2px); z-index: 1;
+    opacity: 0.55;
+  }
+  .blob-1 { width: 340px; height: 340px; background: var(--blush); top: -120px; right: -80px; }
+  .blob-2 { width: 220px; height: 220px; background: var(--lavender); top: 260px; left: -100px; opacity: 0.45; }
+  .blob-3 { width: 160px; height: 160px; background: var(--peach); top: 60px; left: 46%; opacity: 0.35; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 2rem 0;
+  }
+  .wordmark { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.6rem; color: var(--rose-deep); }
+  .nav-links { display: flex; gap: 1.8rem; align-items: center; font-size: 0.92rem; }
+  .nav-links a { color: var(--plum-soft); text-decoration: none; font-weight: 500; }
+  .btn-outline {
+    border: 1.5px solid var(--rose); color: var(--rose-deep); background: none;
+    padding: 0.55rem 1.3rem; border-radius: 30px; font-size: 0.88rem;
+    font-family: 'Quicksand', sans-serif; font-weight: 600; cursor: pointer;
+  }
+  .btn-fill {
+    background: var(--rose); color: #fff; border: none;
+    padding: 0.95rem 1.8rem; border-radius: 30px; font-size: 1rem;
+    font-weight: 600; cursor: pointer; box-shadow: 0 10px 24px rgba(217,139,155,0.4);
+  }
+
+  .hero {
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 2.5rem;
+    align-items: center; padding: 2.5rem 0 5rem;
+  }
+  .eyebrow {
+    display: inline-block; background: var(--blush); color: var(--rose-deep);
+    padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.78rem;
+    font-weight: 600; margin-bottom: 1.1rem;
+  }
+  .hero h1 { font-size: 3.3rem; line-height: 1.12; margin-bottom: 1.3rem; color: var(--plum); }
+  .hero p.sub { font-size: 1.08rem; color: var(--plum-soft); max-width: 28rem; margin-bottom: 2.2rem; }
+
+  .scene { position: relative; height: 380px; }
+  .avatar-card {
+    position: absolute; width: 168px; background: var(--card);
+    border-radius: 24px; padding: 1.2rem; text-align: center;
+    box-shadow: 0 16px 40px rgba(91,63,75,0.14);
+  }
+  .avatar-circle {
+    width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 0.7rem;
+    background: linear-gradient(135deg, var(--blush), var(--peach));
+  }
+  .avatar-card .name { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.15rem; }
+  .avatar-card .detail { font-size: 0.76rem; color: var(--plum-soft); margin-top: 2px; }
+  .card-a { top: 10px; left: 20px; }
+  .card-b { bottom: 10px; right: 10px; }
+  .heart-trail {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: 1.6rem; opacity: 0; animation: fadein 0.8s ease-out 1.1s forwards;
+  }
+  @keyframes fadein { to { opacity: 1; } }
+  .match-pill {
+    position: absolute; top: 58%; left: 50%; transform: translate(-50%, -50%);
+    background: #fff; border: 1.5px solid var(--rose); color: var(--rose-deep);
+    padding: 5px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700;
+    opacity: 0; animation: fadein 0.8s ease-out 1.4s forwards;
+    box-shadow: 0 8px 20px rgba(217,139,155,0.25);
+  }
+  #dotted-path { stroke-dasharray: 4 6; stroke-dashoffset: 300; animation: draw 1.2s ease-out forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  .steps { padding: 4rem 0 5rem; text-align: center; }
+  .steps .eyebrow { }
+  .steps h2 { font-size: 2.3rem; margin: 0.6rem 0 2.5rem; }
+  .step-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; }
+  .step-card {
+    background: var(--card); border-radius: 22px; padding: 2rem 1.5rem;
+    box-shadow: 0 10px 30px rgba(91,63,75,0.08); text-align: left;
+  }
+  .step-icon {
+    width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; font-size: 1.3rem; margin-bottom: 1rem;
+  }
+  .step-card:nth-child(1) .step-icon { background: var(--blush); }
+  .step-card:nth-child(2) .step-icon { background: var(--lavender); }
+  .step-card:nth-child(3) .step-icon { background: var(--peach); }
+  .step-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .step-card p { font-size: 0.94rem; color: var(--plum-soft); }
+
+  .quote-band {
+    text-align: center; padding: 4rem 0; max-width: 700px; margin: 0 auto;
+  }
+  .quote-band p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.6rem; color: var(--plum); }
+  .quote-band .sig { margin-top: 1rem; font-size: 1.4rem; }
+
+  .cta-band {
+    text-align: center; padding: 4.5rem 0 5.5rem; border-radius: 32px;
+    background: linear-gradient(135deg, var(--blush), var(--peach));
+    margin-bottom: 3rem;
+  }
+  .cta-band h2 { font-size: 2.3rem; margin-bottom: 0.8rem; color: var(--plum); }
+  .cta-band p { color: var(--plum-soft); margin-bottom: 1.8rem; }
+
+  footer {
+    padding: 0 0 3rem; display: flex; justify-content: space-between;
+    font-size: 0.85rem; color: var(--plum-soft);
+  }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .step-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<div class="wrap">
+  <nav>
+    <div class="wordmark">Introduced</div>
+    <div class="nav-links">
+      <a href="#">How it works</a>
+      <a href="#">For matchmakers</a>
+      <button class="btn-outline">Sign in</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <span class="eyebrow">no more swiping</span>
+      <h1>Find someone worth <em>slowing down</em> for.</h1>
+      <p class="sub">Share a little about yourself in a real conversation. We find your best matches — then a real person double-checks every one before you're introduced.</p>
+      <button class="btn-fill">Start your introduction →</button>
+    </div>
+
+    <div class="scene">
+      <svg width="100%" height="100%" viewBox="0 0 300 380" style="position:absolute; top:0; left:0; overflow:visible;">
+        <path id="dotted-path" d="M 100 90 Q 150 200 200 300" stroke="#D98B9B" stroke-width="2.5" fill="none" stroke-linecap="round" />
+      </svg>
+      <div class="avatar-card card-a">
+        <div class="avatar-circle"></div>
+        <div class="name">Maren, 29</div>
+        <div class="detail">Nashville</div>
+      </div>
+      <div class="avatar-card card-b">
+        <div class="avatar-circle"></div>
+        <div class="name">Jonah, 31</div>
+        <div class="detail">Franklin</div>
+      </div>
+      <div class="heart-trail">💗</div>
+      <div class="match-pill">matched — 91%</div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="steps">
+    <span class="eyebrow">how it works</span>
+    <h2>Three gentle steps</h2>
+    <div class="step-row">
+      <div class="step-card">
+        <div class="step-icon">💬</div>
+        <h3>You talk, we listen</h3>
+        <p>A warm, guided conversation — not a form. We ask what actually matters to you and follow the thread.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">✨</div>
+        <h3>We find your matches</h3>
+        <p>Compatibility across values, lifestyle, and what you're really looking for — with your dealbreakers respected completely.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">💌</div>
+        <h3>A person says yes</h3>
+        <p>Every match is reviewed by a real matchmaker before either of you hears a thing about it.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="quote-band">
+    <p>"It felt like a friend was setting me up — not an app trying to keep me scrolling."</p>
+    <div class="sig script">— an early member</div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="cta-band">
+    <h2>Ready to be introduced?</h2>
+    <p>It takes about ten minutes, and no photo required to start.</p>
+    <button class="btn-fill">Start your introduction →</button>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div>Introduced — Spring Hill, TN</div>
+    <div>Privacy · Terms · Contact</div>
+  </footer>
+</div>
+
+</body>
+</html>

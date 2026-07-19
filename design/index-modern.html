@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAF6EF;
+    --ink: #241F1B;
+    --ink-soft: #6E655C;
+    --rust: #C1553B;
+    --rust-dark: #9C4230;
+    --panel: #FFFFFF;
+    --line: rgba(36,31,27,0.12);
+    --block: #E9E1D3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; letter-spacing: -0.01em; }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--rust);
+  }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.8rem 0; border-bottom: 1px solid var(--line);
+  }
+  .wordmark { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.25rem; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 2.2rem; align-items: center; font-size: 0.9rem; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 500; }
+  .btn-outline {
+    border: 1px solid var(--ink); color: var(--ink); background: none;
+    padding: 0.55rem 1.2rem; border-radius: 4px; font-size: 0.86rem;
+    font-weight: 500; cursor: pointer;
+  }
+  .btn-fill {
+    background: var(--rust); color: #FFF8F2; border: none;
+    padding: 0.9rem 1.7rem; border-radius: 4px; font-size: 0.96rem;
+    font-weight: 600; cursor: pointer;
+  }
+
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+    align-items: center; padding: 4rem 0 5rem;
+  }
+  .hero h1 { font-size: 3.4rem; line-height: 1.05; margin: 1rem 0 1.4rem; }
+  .hero h1 span { color: var(--rust); }
+  .hero p.sub { font-size: 1.05rem; color: var(--ink-soft); max-width: 27rem; margin-bottom: 2.2rem; }
+
+  .hero-photo {
+    position: relative; border-radius: 10px; overflow: hidden;
+    aspect-ratio: 4 / 5; box-shadow: 0 20px 40px rgba(36,31,27,0.16);
+  }
+  .hero-photo img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: grayscale(15%) sepia(8%) saturate(115%);
+  }
+  .hero-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(193,85,59,0) 55%, rgba(36,31,27,0.55) 100%);
+  }
+  .photo-panel-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+    padding: 1.4rem; color: #FFF8F2;
+  }
+  .photo-panel-overlay .row { display: flex; justify-content: space-between; align-items: center; }
+  .photo-panel-overlay .name { font-weight: 600; font-size: 0.95rem; }
+  .photo-panel-overlay .loc { font-size: 0.78rem; opacity: 0.85; }
+  .score-chip {
+    background: var(--rust); padding: 6px 12px; border-radius: 5px;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem;
+  }
+  .reviewed-badge {
+    position: absolute; top: 16px; right: 16px; z-index: 2;
+    background: #FAF6EF; color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em;
+    padding: 5px 10px; border-radius: 4px;
+  }
+
+  .gallery { padding: 4.5rem 0; border-top: 1px solid var(--line); }
+  .gallery-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; }
+  .gallery-head h2 { font-size: 2rem; }
+  .gallery-head p { color: var(--ink-soft); max-width: 22rem; font-size: 0.95rem; }
+  .gallery-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  }
+  .gallery-card { border-radius: 8px; overflow: hidden; position: relative; aspect-ratio: 3/4; }
+  .gallery-card img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: grayscale(15%) sepia(8%) saturate(115%);
+  }
+  .gallery-card .tag {
+    position: absolute; bottom: 10px; left: 10px; background: rgba(36,31,27,0.7);
+    color: #FAF6EF; font-size: 0.72rem; padding: 3px 8px; border-radius: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  .ledger { padding: 4.5rem 0; border-top: 1px solid var(--line); }
+  .ledger-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2.2rem; }
+  .ledger h2 { font-size: 2rem; }
+  .ledger-row {
+    display: grid; grid-template-columns: 200px 1fr 1fr; gap: 2rem;
+    padding: 1.3rem 0; border-top: 1px solid var(--line); align-items: start;
+  }
+  .ledger-row:last-child { border-bottom: 1px solid var(--line); }
+  .ledger-row .cat { font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem; color: var(--ink-soft); }
+  .ledger-row .old { color: var(--ink-soft); font-size: 0.95rem; }
+  .ledger-row .new { color: var(--ink); font-size: 0.95rem; font-weight: 500; }
+  .col-head { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-bottom: 0.5rem; }
+
+  .steps { padding: 4.5rem 0; border-top: 1px solid var(--line); }
+  .steps h2 { font-size: 2rem; margin-bottom: 2.5rem; }
+  .step-row { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .step-card { padding: 0 1.6rem 0 0; border-right: 1px solid var(--line); }
+  .step-card:last-child { border-right: none; padding-right: 0; }
+  .step-card:not(:first-child) { padding-left: 1.6rem; }
+  .step-card .num { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.8rem; color: var(--rust); margin-bottom: 0.8rem; }
+  .step-card h3 { font-size: 1.15rem; margin-bottom: 0.6rem; }
+  .step-card p { font-size: 0.92rem; color: var(--ink-soft); }
+
+  .cta-band {
+    padding: 5rem 2.5rem; border-radius: 10px; position: relative; overflow: hidden;
+    display: flex; justify-content: space-between; align-items: center;
+    margin: 4.5rem 0;
+  }
+  .cta-band img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    filter: grayscale(30%) sepia(10%) saturate(110%); z-index: 0;
+  }
+  .cta-band::after {
+    content: ''; position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(90deg, rgba(36,31,27,0.82) 35%, rgba(36,31,27,0.4) 100%);
+  }
+  .cta-band > * { position: relative; z-index: 2; }
+  .cta-band h2 { font-size: 2.1rem; max-width: 20rem; color: #FAF6EF; }
+  .cta-band p { color: #D8CFC2; margin-top: 0.8rem; max-width: 22rem; }
+
+  footer {
+    border-top: 1px solid var(--line); padding: 2rem 0 3rem;
+    display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .step-row { grid-template-columns: 1fr; }
+    .step-card { border-right: none; padding: 0 0 1.6rem 0 !important; border-bottom: 1px solid var(--line); }
+    .ledger-row { grid-template-columns: 1fr; }
+    .cta-band { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .hero h1 { font-size: 2.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="wordmark">Introduced</div>
+    <div class="nav-links">
+      <a href="#">How it works</a>
+      <a href="#">For matchmakers</a>
+      <button class="btn-outline">Sign in</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">No more swiping</div>
+      <h1>Matched by data.<br><span>Approved by a person.</span></h1>
+      <p class="sub">One real conversation instead of a form. We score compatibility across what actually matters, then a matchmaker reviews every pairing before you hear about it.</p>
+      <button class="btn-fill">Start your introduction →</button>
+    </div>
+
+    <div class="hero-photo">
+      <div class="reviewed-badge">reviewed match</div>
+      <img src="https://picsum.photos/seed/introduced-hero/700/875" alt="">
+      <div class="photo-panel-overlay">
+        <div class="row">
+          <div>
+            <div class="name">Maren &amp; Jonah</div>
+            <div class="loc">Nashville · Franklin</div>
+          </div>
+          <div class="score-chip">91</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="gallery">
+    <div class="gallery-head">
+      <h2>Real people, real reviews</h2>
+      <p>Every profile below was matched by the algorithm and personally reviewed before anyone saw it.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-card">
+        <img src="https://picsum.photos/seed/introduced-1/300/400" alt="">
+        <div class="tag">matched 88</div>
+      </div>
+      <div class="gallery-card">
+        <img src="https://picsum.photos/seed/introduced-2/300/400" alt="">
+        <div class="tag">matched 94</div>
+      </div>
+      <div class="gallery-card">
+        <img src="https://picsum.photos/seed/introduced-3/300/400" alt="">
+        <div class="tag">matched 90</div>
+      </div>
+      <div class="gallery-card">
+        <img src="https://picsum.photos/seed/introduced-4/300/400" alt="">
+        <div class="tag">matched 86</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="ledger">
+    <div class="ledger-head">
+      <h2>Why not another app</h2>
+    </div>
+    <div class="ledger-row">
+      <div class="cat">Discovery</div>
+      <div>
+        <div class="col-head">Other apps</div>
+        <div class="old">An algorithm shows you a stack of strangers to swipe through.</div>
+      </div>
+      <div>
+        <div class="col-head">Introduced</div>
+        <div class="new">An algorithm proposes a handful of real fits, ranked by actual compatibility.</div>
+      </div>
+    </div>
+    <div class="ledger-row">
+      <div class="cat">Review</div>
+      <div>
+        <div class="old">No one checks the match before you see it.</div>
+      </div>
+      <div>
+        <div class="new">A real matchmaker reviews every pairing before it's sent.</div>
+      </div>
+    </div>
+    <div class="ledger-row">
+      <div class="cat">Incentive</div>
+      <div>
+        <div class="old">Optimized to keep you swiping longer.</div>
+      </div>
+      <div>
+        <div class="new">Built to get you on a date, not on the app.</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="steps">
+    <h2>How it works</h2>
+    <div class="step-row">
+      <div class="step-card">
+        <div class="num">01</div>
+        <h3>You talk, we listen</h3>
+        <p>A short guided conversation, not a form — we ask what actually matters and follow up on your answers.</p>
+      </div>
+      <div class="step-card">
+        <div class="num">02</div>
+        <h3>The algorithm scores</h3>
+        <p>Compatibility across values, lifestyle, and goals — dealbreakers rule out mismatches entirely.</p>
+      </div>
+      <div class="step-card">
+        <div class="num">03</div>
+        <h3>A person approves</h3>
+        <p>Every suggested match is reviewed by a matchmaker before either of you hears about it.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="cta-band">
+    <img src="https://picsum.photos/seed/introduced-cta/1400/500" alt="">
+    <div>
+      <h2>Ready to be introduced?</h2>
+      <p>Takes about ten minutes. No photo required to start.</p>
+    </div>
+    <button class="btn-fill">Start your introduction →</button>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div>Introduced — Spring Hill, TN</div>
+    <div>Privacy · Terms · Contact</div>
+  </footer>
+</div>
+
+</body>
+</html>

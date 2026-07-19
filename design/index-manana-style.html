@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F4EEDD;
+    --cream-dim: #E7DEC5;
+    --charcoal: #2B2E30;
+    --charcoal-soft: #3B3F42;
+    --ink: #23201A;
+    --ink-soft: #6E6555;
+    --rust: #B85C33;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .script { font-family: 'Alex Brush', cursive; line-height: 1; }
+  .small-caps {
+    font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 2.5rem; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.6rem 2.5rem;
+  }
+  .wordmark { font-family: 'Alex Brush', cursive; font-size: 2rem; color: var(--ink); }
+  .nav-links { display: flex; gap: 2.2rem; align-items: center; }
+  .nav-links a { color: var(--ink); text-decoration: none; }
+  .btn-outline {
+    border: 1.5px solid var(--ink); color: var(--ink); background: none;
+    padding: 0.5rem 1.2rem; cursor: pointer; font-family: 'Inter', sans-serif;
+  }
+
+  .hero-split {
+    display: grid; grid-template-columns: 1fr 1fr; min-height: 560px;
+  }
+  .hero-left {
+    background: var(--cream); display: flex; align-items: center; justify-content: center;
+    padding: 3rem;
+  }
+  .hero-left svg { width: 100%; max-width: 340px; height: auto; }
+  .hero-right {
+    background: var(--charcoal); color: var(--cream); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; padding: 3rem;
+    position: relative;
+  }
+  .hero-right .script { font-size: 5rem; color: var(--cream); margin-bottom: 1.2rem; }
+  .hero-right p.sub {
+    font-size: 1rem; color: #C9C2AE; max-width: 24rem; margin-bottom: 2rem; line-height: 1.75;
+  }
+  .label-row { display: flex; gap: 3rem; margin-top: 1rem; }
+  .label-row .small-caps { color: var(--cream); line-height: 1.5; text-align: left; }
+  .btn-fill {
+    background: var(--rust); color: var(--cream); border: none;
+    padding: 0.95rem 1.8rem; font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    margin-top: 1rem; display: inline-block;
+  }
+
+  .ledger { padding: 5rem 0; }
+  .ledger-head { text-align: center; margin-bottom: 2.8rem; }
+  .ledger-head .script { font-size: 2.6rem; }
+  .ledger-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem;
+    padding: 1.3rem 0; border-top: 1px solid rgba(35,32,26,0.15); align-items: start;
+  }
+  .ledger-row:last-child { border-bottom: 1px solid rgba(35,32,26,0.15); }
+  .ledger-row .small-caps { color: var(--ink-soft); margin-bottom: 0.4rem; display: block; }
+  .ledger-row .old { color: var(--ink-soft); }
+  .ledger-row .new { color: var(--ink); font-weight: 500; }
+
+  .steps-band {
+    background: var(--charcoal); color: var(--cream); padding: 5rem 0;
+  }
+  .steps-head { text-align: center; margin-bottom: 3rem; }
+  .steps-head .script { font-size: 2.6rem; color: var(--cream); }
+  .step-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; text-align: center; }
+  .step-icon { margin: 0 auto 1.2rem; width: 52px; height: 52px; }
+  .step-card h3 { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1.1rem; margin-bottom: 0.6rem; }
+  .step-card p { font-size: 0.92rem; color: #B9B2A0; max-width: 18rem; margin: 0 auto; }
+
+  .cta-band { text-align: center; padding: 5rem 0; }
+  .cta-band .script { font-size: 3rem; margin-bottom: 0.6rem; }
+  .cta-band p { color: var(--ink-soft); margin-bottom: 1.8rem; }
+
+  footer {
+    padding: 2rem 2.5rem 3rem; display: flex; justify-content: space-between;
+    font-size: 0.82rem; color: var(--ink-soft);
+  }
+
+  @media (max-width: 860px) {
+    .hero-split { grid-template-columns: 1fr; }
+    .step-row { grid-template-columns: 1fr; }
+    .ledger-row { grid-template-columns: 1fr; }
+    .hero-right .script { font-size: 3.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wordmark">Introduced</div>
+  <div class="nav-links">
+    <a href="#" class="small-caps">How it works</a>
+    <a href="#" class="small-caps">For matchmakers</a>
+    <button class="btn-outline small-caps">Sign in</button>
+  </div>
+</nav>
+
+<section class="hero-split">
+  <div class="hero-left">
+    <svg viewBox="0 0 300 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="150" y1="330" x2="150" y2="150" stroke="#23201A" stroke-width="7" stroke-linecap="round"/>
+      <path d="M150 150 C 120 120, 118 80, 150 55 C 182 80, 180 120, 150 150 Z" fill="#23201A"/>
+      <path d="M150 60 C 138 78, 138 100, 150 118" stroke="#F4EEDD" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M150 335 C 130 330, 90 336, 60 320" stroke="#23201A" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M150 335 C 170 330, 210 336, 240 320" stroke="#23201A" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <circle cx="150" cy="150" r="4" fill="#F4EEDD"/>
+    </svg>
+  </div>
+  <div class="hero-right">
+    <div class="script">Introduced</div>
+    <p class="sub">Every match is read, not just ranked. Tell us who you are — we'll strike the match.</p>
+    <div class="label-row">
+      <div class="small-caps">Matched<br>by data</div>
+      <div class="small-caps">Approved<br>by a person</div>
+    </div>
+    <button class="btn-fill">Start your introduction →</button>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="ledger">
+    <div class="ledger-head">
+      <div class="script">Why not another app</div>
+    </div>
+    <div class="ledger-row">
+      <div>
+        <span class="small-caps">Other apps</span>
+        <div class="old">An algorithm shows you a stack of strangers and lets you swipe through hundreds.</div>
+      </div>
+      <div>
+        <span class="small-caps">Introduced</span>
+        <div class="new">An algorithm proposes a handful of real fits — and a person checks each one before it's sent.</div>
+      </div>
+    </div>
+    <div class="ledger-row">
+      <div><div class="old">You do the matching yourself, one photo at a time.</div></div>
+      <div><div class="new">You have one honest conversation. We do the matching.</div></div>
+    </div>
+    <div class="ledger-row">
+      <div><div class="old">Optimized to keep you swiping.</div></div>
+      <div><div class="new">Built to get you off the app, on a date.</div></div>
+    </div>
+  </section>
+</div>
+
+<section class="steps-band">
+  <div class="wrap">
+    <div class="steps-head"><div class="script">How it works</div></div>
+    <div class="step-row">
+      <div class="step-card">
+        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="#F4EEDD" stroke-width="1.4"><path d="M3 6l9 6 9-6M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" stroke-linejoin="round"/></svg>
+        <h3>You write to us</h3>
+        <p>A short guided conversation, not a form — we ask what actually matters and follow the thread.</p>
+      </div>
+      <div class="step-card">
+        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="#F4EEDD" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 8l1.8 3.7L16 12l-2.2.3L12 16l-1.8-3.7L8 12l2.2-.3L12 8z" stroke-linejoin="round"/></svg>
+        <h3>We chart a match</h3>
+        <p>Compatibility across values, lifestyle, and what you're really looking for — dealbreakers rule out mismatches entirely.</p>
+      </div>
+      <div class="step-card">
+        <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="#F4EEDD" stroke-width="1.4"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>A person signs off</h3>
+        <p>Every suggested match is reviewed by an actual matchmaker before either of you hears about it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="cta-band">
+    <div class="script">Ready to be introduced?</div>
+    <p>It takes about ten minutes, and no photo required to start.</p>
+    <button class="btn-fill" style="margin: 0 auto;">Start your introduction →</button>
+  </section>
+</div>
+
+<footer>
+  <div>Introduced — Spring Hill, TN</div>
+  <div>Privacy · Terms · Contact</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduced</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --kraft: #EDE3CD;
+    --kraft-dark: #E2D5B7;
+    --green: #2E4034;
+    --green-dark: #202D24;
+    --rust: #BD5B28;
+    --rust-dark: #96461D;
+    --cream: #F5EEDC;
+    --ink: #2B2418;
+    --ink-soft: #675C46;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: var(--kraft);
+    background-image:
+      repeating-linear-gradient(45deg, rgba(43,36,24,0.025) 0px, rgba(43,36,24,0.025) 1px, transparent 1px, transparent 10px);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 2rem; }
+  h1, h2, h3 { font-family: 'Bitter', serif; font-weight: 700; }
+  .script { font-family: 'Sacramento', cursive; color: var(--rust-dark); }
+  em { font-style: italic; color: var(--rust-dark); font-weight: 500; }
+
+  .rule { border-top: 3px double var(--ink); opacity: 0.25; }
+
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.6rem 0; border-bottom: 3px double var(--ink); opacity-parent: 1;
+  }
+  .wordmark-group { display: flex; align-items: center; gap: 12px; }
+  .badge {
+    width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0;
+  }
+  .badge::before {
+    content: ''; position: absolute; inset: 4px; border: 1px dashed var(--green); border-radius: 50%;
+  }
+  .badge svg { width: 20px; height: 20px; }
+  .wordmark { font-family: 'Bitter', serif; font-weight: 700; font-size: 1.35rem; letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 2rem; align-items: center; font-size: 0.9rem; }
+  .nav-links a { color: var(--ink); text-decoration: none; font-weight: 500; }
+  .btn-outline {
+    border: 2px solid var(--ink); color: var(--ink); background: none;
+    padding: 0.5rem 1.1rem; font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  }
+  .btn-ticket {
+    background: var(--rust); color: var(--cream); border: none;
+    padding: 0.95rem 1.7rem; font-size: 0.98rem; font-weight: 600; cursor: pointer;
+    position: relative; border-radius: 2px;
+  }
+  .btn-ticket::before, .btn-ticket::after {
+    content: ''; position: absolute; top: 50%; width: 12px; height: 12px;
+    background: var(--kraft); border-radius: 50%; transform: translateY(-50%);
+  }
+  .btn-ticket::before { left: -6px; }
+  .btn-ticket::after { right: -6px; }
+
+  .hero { text-align: center; padding: 4rem 0 3rem; }
+  .eyebrow {
+    font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--rust-dark); font-weight: 600; margin-bottom: 1rem;
+  }
+  .hero h1 { font-size: 3.2rem; line-height: 1.15; max-width: 40rem; margin: 0 auto 1.3rem; }
+  .hero p.sub {
+    font-size: 1.1rem; color: var(--ink-soft); max-width: 32rem; margin: 0 auto 2rem;
+  }
+
+  .stamp-scene {
+    display: flex; justify-content: center; align-items: center; gap: 0;
+    margin: 3rem 0 3.5rem; position: relative;
+  }
+  .stamp-card {
+    background: var(--cream); border: 2px solid var(--ink); padding: 1.1rem 1.3rem;
+    width: 200px; position: relative;
+  }
+  .stamp-card::before {
+    content: ''; position: absolute; inset: 6px; border: 1px dashed var(--ink-soft);
+  }
+  .stamp-card .name { font-family: 'Bitter', serif; font-weight: 700; font-size: 1.15rem; }
+  .stamp-card .detail { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+  .stamp-a { transform: rotate(-3deg); margin-right: -18px; z-index: 1; }
+  .stamp-b { transform: rotate(3deg); margin-left: -18px; }
+  .seal-mark {
+    width: 84px; height: 84px; border-radius: 50%; background: var(--green);
+    color: var(--cream); display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 2; border: 3px solid var(--kraft); box-shadow: 0 0 0 2px var(--green);
+    font-family: 'Bitter', serif; text-align: center;
+  }
+  .seal-mark .num { font-weight: 700; font-size: 1.3rem; line-height: 1; }
+  .seal-mark .label { font-size: 0.55rem; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; }
+
+  .ledger { padding: 3.5rem 0 4.5rem; }
+  .ledger h2 { font-size: 2rem; text-align: center; margin-bottom: 2.2rem; }
+  .ledger-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
+    padding: 1.2rem 0; border-top: 1px solid rgba(43,36,24,0.2); align-items: start;
+  }
+  .ledger-row:last-child { border-bottom: 1px solid rgba(43,36,24,0.2); }
+  .ledger-row .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); margin-bottom: 0.3rem; font-weight: 600; }
+  .ledger-row .old { color: var(--ink-soft); }
+  .ledger-row .new { color: var(--ink); font-weight: 500; }
+
+  .steps { padding: 4rem 0; }
+  .steps h2 { font-size: 2rem; text-align: center; margin-bottom: 2.5rem; }
+  .step-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center; }
+  .step-icon {
+    width: 56px; height: 56px; border-radius: 50%; border: 2px solid var(--green);
+    display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;
+  }
+  .step-icon svg { width: 26px; height: 26px; }
+  .step-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+  .step-card p { font-size: 0.92rem; color: var(--ink-soft); }
+
+  .cta-band {
+    background: var(--green); color: var(--cream); text-align: center;
+    padding: 4rem 2rem; margin: 2rem 0 3rem;
+  }
+  .cta-band h2 { font-size: 2.2rem; margin-bottom: 0.8rem; }
+  .cta-band p { color: #C7D0C8; margin-bottom: 1.8rem; }
+  .cta-band .script { color: var(--kraft-dark); font-size: 1.3rem; display: block; margin-top: 1.2rem; }
+
+  footer {
+    padding: 2rem 0 3rem; display: flex; justify-content: space-between;
+    font-size: 0.82rem; color: var(--ink-soft); border-top: 3px double var(--ink);
+  }
+
+  @media (max-width: 860px) {
+    .step-row { grid-template-columns: 1fr; gap: 2.5rem; }
+    .ledger-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 2.2rem; }
+    .stamp-scene { flex-direction: column; gap: 1rem; }
+    .stamp-a, .stamp-b { margin: 0; }
+    .seal-mark { margin: 0.5rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav>
+    <div class="wordmark-group">
+      <div class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2E4034" stroke-width="1.6"><path d="M9 12a3 3 0 1 0 0-.001M15 12a3 3 0 1 0 0-.001M9 12h6" stroke-linecap="round"/></svg>
+      </div>
+      <div class="wordmark">Introduced</div>
+    </div>
+    <div class="nav-links">
+      <a href="#">How it works</a>
+      <a href="#">For matchmakers</a>
+      <button class="btn-outline">Sign in</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="eyebrow">Est. 2026 · matched by hand</div>
+    <h1>The old way of meeting someone, done properly.</h1>
+    <p class="sub">Tell us who you are in a real conversation. We propose your best matches — then a real matchmaker looks over every pairing before it's sent.</p>
+    <button class="btn-ticket">Start your introduction →</button>
+
+    <div class="stamp-scene">
+      <div class="stamp-card stamp-a">
+        <div class="name">Maren, 29</div>
+        <div class="detail">Nashville</div>
+      </div>
+      <div class="seal-mark">
+        <div class="num">91</div>
+        <div class="label">matched</div>
+      </div>
+      <div class="stamp-card stamp-b">
+        <div class="name">Jonah, 31</div>
+        <div class="detail">Franklin</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<div class="wrap">
+  <section class="ledger">
+    <h2>Why not another app</h2>
+    <div class="ledger-row">
+      <div>
+        <div class="label">Other apps</div>
+        <div class="old">An algorithm shows you a stack of strangers and lets you swipe through hundreds.</div>
+      </div>
+      <div>
+        <div class="label">Introduced</div>
+        <div class="new">An algorithm proposes a handful of real fits — and a person checks each one before it's sent.</div>
+      </div>
+    </div>
+    <div class="ledger-row">
+      <div><div class="old">You do the matching yourself, one photo at a time.</div></div>
+      <div><div class="new">You have one honest conversation. We do the matching.</div></div>
+    </div>
+    <div class="ledger-row">
+      <div><div class="old">Optimized to keep you swiping.</div></div>
+      <div><div class="new">Built to get you off the app, on a date.</div></div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap"><div class="rule"></div></div>
+
+<div class="wrap">
+  <section class="steps">
+    <h2>How it works</h2>
+    <div class="step-row">
+      <div class="step-card">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2E4034" stroke-width="1.6"><path d="M3 6l9 6 9-6M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>You write to us</h3>
+        <p>A short guided conversation, not a form — we ask what actually matters and follow the thread.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2E4034" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 8l1.8 3.7L16 12l-2.2.3L12 16l-1.8-3.7L8 12l2.2-.3L12 8z" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>We chart a match</h3>
+        <p>Compatibility across values, lifestyle, and what you're really looking for — dealbreakers rule out mismatches entirely.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2E4034" stroke-width="1.6"><path d="M4 12l5 5L20 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>A person signs off</h3>
+        <p>Every suggested match is reviewed by an actual matchmaker before either of you hears about it.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="cta-band">
+    <h2>Ready to be introduced?</h2>
+    <p>It takes about ten minutes, and no photo required to start.</p>
+    <button class="btn-ticket">Start your introduction →</button>
+    <span class="script">with care, since 2026</span>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer>
+    <div>Introduced — Spring Hill, TN</div>
+    <div>Privacy · Terms · Contact</div>
+  </footer>
+</div>
+
+</body>
+</html>
