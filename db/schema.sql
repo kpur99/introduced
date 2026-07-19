@@ -14,6 +14,7 @@ create table if not exists profiles (
   location_lat float8,
   location_lng float8,
   max_distance_miles int default 50,
+  avatar_url text,                -- primary profile photo, set via the intake photo upload step
   photos jsonb default '[]'::jsonb,
   bio text,
   onboarding_complete boolean default false,
@@ -85,6 +86,13 @@ create table if not exists matches (
 create index if not exists idx_match_scores_score on match_scores (score desc);
 create index if not exists idx_matches_status on matches (status);
 
+-- These two are written to and read from only by the backend (via the service-role
+-- key, which bypasses RLS entirely) — the admin dashboard goes through
+-- app/api/admin/matches rather than querying these tables directly from the browser.
+-- Enabling RLS with no policies means anon/authenticated clients get nothing.
+alter table match_scores enable row level security;
+alter table matches enable row level security;
+
 -- Row Level Security — users can only see/edit their own profile + intake data.
 -- Admin review dashboard should use the Supabase service role key server-side
 -- to bypass RLS, never expose it client-side.
@@ -100,3 +108,34 @@ create policy "Users manage own conversation" on intake_conversations
 
 create policy "Users read own intake profile" on intake_profiles
   for select using (auth.uid() = user_id);
+
+-- ============================================================
+-- Storage — profile photos
+-- Creates a public bucket for profile photos and restricts writes so
+-- users can only upload/replace/delete files inside their own folder
+-- (path convention: {user_id}/{filename}).
+-- ============================================================
+insert into storage.buckets (id, name, public)
+values ('profile-photos', 'profile-photos', true)
+on conflict (id) do nothing;
+
+create policy "Anyone can view profile photos" on storage.objects
+  for select using (bucket_id = 'profile-photos');
+
+create policy "Users upload to their own folder" on storage.objects
+  for insert with check (
+    bucket_id = 'profile-photos'
+    and (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+create policy "Users update their own photos" on storage.objects
+  for update using (
+    bucket_id = 'profile-photos'
+    and (storage.foldername(name))[1] = auth.uid()::text
+  );
+
+create policy "Users delete their own photos" on storage.objects
+  for delete using (
+    bucket_id = 'profile-photos'
+    and (storage.foldername(name))[1] = auth.uid()::text
+  );

@@ -106,7 +106,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 70px 30px;
+  padding: 70px 40px 70px 0;
   background: var(--charcoal);
   color: var(--cream);
   text-align: center;
@@ -124,36 +124,37 @@ textarea {
 }
 
 .hero-inner {
-  width: min(1040px, 100%);
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0;
 }
 
 .hero-mascot {
   flex: 0 0 auto;
-  width: clamp(290px, 38vw, 500px);
+  width: clamp(320px, 40vw, 600px);
   height: auto;
+  margin-left: -32px;
   margin-bottom: -8px;
   mix-blend-mode: lighten;
 }
 
 .hero-copy {
   flex: 1 1 auto;
-  width: min(620px, 100%);
+  min-width: 0;
   text-align: left;
 }
 
 .brand {
   margin-bottom: 34px;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(5rem, 13vw, 10rem);
+  font-size: clamp(2.8rem, 7.5vw, 6rem);
   font-style: italic;
   font-weight: 700;
   line-height: 0.82;
-  letter-spacing: -0.08em;
+  letter-spacing: -0.06em;
 }
 
 .hero-copy h1 {

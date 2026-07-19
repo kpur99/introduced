@@ -1,14 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@supabase/supabase-js";
 
-// This page should be behind your own admin auth check (e.g. a specific
-// user_id or email allowlist) — not shown here, add before shipping.
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+// TODO: this page has no auth check yet — anyone with the URL can approve/reject
+// matches. Add an admin allowlist before this goes live (see README).
 
 type MatchRow = {
   id: string;
@@ -26,18 +21,9 @@ export default function AdminMatchesPage() {
 
   async function loadMatches() {
     setLoading(true);
-    const { data } = await supabase
-      .from("matches")
-      .select(
-        `id, status, admin_notes,
-         match_scores ( score, score_breakdown ),
-         user_a:profiles!matches_user_a_id_fkey ( first_name, age, bio ),
-         user_b:profiles!matches_user_b_id_fkey ( first_name, age, bio )`
-      )
-      .eq("status", "suggested")
-      .order("id", { ascending: false });
-
-    setMatches((data as unknown as MatchRow[]) ?? []);
+    const res = await fetch("/api/admin/matches");
+    const data = await res.json();
+    setMatches(data.matches ?? []);
     setLoading(false);
   }
 
@@ -46,7 +32,11 @@ export default function AdminMatchesPage() {
   }, []);
 
   async function updateStatus(matchId: string, status: string) {
-    await supabase.from("matches").update({ status, updated_at: new Date().toISOString() }).eq("id", matchId);
+    await fetch("/api/admin/matches", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ matchId, status }),
+    });
     setMatches((prev) => prev.filter((m) => m.id !== matchId));
   }
 
