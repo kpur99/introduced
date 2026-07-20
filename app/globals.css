@@ -134,9 +134,9 @@ textarea {
 
 .hero-mascot {
   flex: 0 0 auto;
-  width: clamp(320px, 40vw, 600px);
+  width: clamp(400px, 52vw, 820px);
   height: auto;
-  margin-left: -32px;
+  margin-left: -80px;
   margin-bottom: -8px;
   mix-blend-mode: lighten;
 }
